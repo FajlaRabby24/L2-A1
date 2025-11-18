@@ -53,3 +53,29 @@ const emp: Employee = {
   salary: 50000,
 };
 ```
+
+### 2. keyof কীওয়ার্ড কী এবং কেন ব্যবহার করা হয়?
+
+keyof হলো TypeScript-এর একটি operator যা কোনো object বা interface-এর সবগুলো key-এর union তৈরি করে। এটি পুরোপুরি compile-time এ কাজ করে এবং ভুল key ব্যবহারের সুযোগ কমায়।
+
+#### Keyof:
+
+- টাইপ-সেইফ key checking নিশ্চিত করে
+- ভুল key ব্যবহারের ঝুঁকি কমায়
+- বড় প্রজেক্টে maintainability বাড়ায়
+
+```typescript
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+}
+
+type ProductKeys = keyof Product; // "id" | "title" | "price"
+
+let key: ProductKeys;
+
+key = "id"; // valid
+key = "price"; // valid
+// key = "stock"; // ❌ error: not a key of Product
+```
