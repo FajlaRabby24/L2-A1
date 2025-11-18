@@ -1,6 +1,6 @@
 // * problem 1
-type TProblem1 = string | number | boolean;
-const formatValue = (value: TProblem1): TProblem1 => {
+type TFormatValue = string | number | boolean;
+const formatValue = (value: TFormatValue): TFormatValue => {
   if (typeof value === "string") {
     return value.toUpperCase();
   } else if (typeof value === "number") {
@@ -11,8 +11,8 @@ const formatValue = (value: TProblem1): TProblem1 => {
 };
 
 // * problem 2
-type TProblem2 = string | unknown[];
-const getLength = (value: TProblem2): number | string => {
+type TGetLength = string | unknown[];
+const getLength = (value: TGetLength): number | string => {
   if (typeof value === "string") {
     return value.length;
   } else if (Array.isArray(value)) {
@@ -23,12 +23,12 @@ const getLength = (value: TProblem2): number | string => {
 };
 
 // * problem 3
-interface TProblem3 {
+interface IPerson {
   name: string;
   age: number;
   getDetails(): string;
 }
-class Person implements TProblem3 {
+class Person implements IPerson {
   name: string;
   age: number;
   constructor(name: string, age: number) {
@@ -43,23 +43,25 @@ class Person implements TProblem3 {
 }
 
 // * problem 4
-type TProblem4 = {
+interface IFilterByRating {
   title: string;
   rating: number;
-};
-const filterByRating = (books: TProblem4[]): TProblem4[] => {
-  return books.filter((book: TProblem4) => book.rating >= 4);
+}
+const filterByRating = (books: IFilterByRating[]): IFilterByRating[] => {
+  return books.filter((book: IFilterByRating) => book.rating >= 4);
 };
 
 // * problem 5
-type TProblem5 = {
+interface IFilterActiveUsers {
   id: number;
   name: string;
   email: string;
   isActive: boolean;
-};
-const filterActiveUsers = (users: TProblem5[]): TProblem5[] => {
-  return users.filter((user: TProblem5) => user.isActive);
+}
+const filterActiveUsers = (
+  users: IFilterActiveUsers[]
+): IFilterActiveUsers[] => {
+  return users.filter((user: IFilterActiveUsers) => user.isActive);
 };
 
 // * problem 6
@@ -78,13 +80,16 @@ const printBookDetails = (book: Book): void => {
 };
 
 // * problem 7
-type TProblem7 = (string | number)[];
-const getUniqueValues = (arr1: TProblem7, arr2: TProblem7): TProblem7 => {
+type IGetUniqueValues = (string | number)[];
+const getUniqueValues = (
+  arr1: IGetUniqueValues,
+  arr2: IGetUniqueValues
+): IGetUniqueValues => {
   const combineArr = [...arr1, ...arr2];
-  const uniqueArr: TProblem7 = [];
+  const uniqueArr: IGetUniqueValues = [];
 
   // check value exists or not in unique array
-  const exists = (array: TProblem7, value: number | string): boolean => {
+  const exists = (array: IGetUniqueValues, value: number | string): boolean => {
     for (let i = 0; i < array.length; i++) {
       if (array[i] === value) {
         return true;
@@ -103,14 +108,14 @@ const getUniqueValues = (arr1: TProblem7, arr2: TProblem7): TProblem7 => {
 };
 
 // * problem 8
-interface TProblem8 {
+interface ICalculateTotalPrice {
   name: string;
   price: number;
   quantity: number;
   discount?: number;
 }
-const calculateTotalPrice = (products: TProblem8[]): number => {
-  return products.reduce((acc: number, product: TProblem8) => {
+const calculateTotalPrice = (products: ICalculateTotalPrice[]): number => {
+  return products.reduce((acc: number, product: ICalculateTotalPrice) => {
     let productTotalPrice = product.price * product.quantity;
 
     if (product?.discount) {
