@@ -1,24 +1,55 @@
-1.TypeScript এ Interface এবং Type এর মধ্যে পার্থক্য?
+### 1. TypeScript এ Interface এবং Type এর মধ্যে পার্থক্য?
 
 TypeScript-এ object structure define করার সময় আমরা বেশিরভাগ ক্ষেত্রে interface বা type ব্যবহার করি। দুটোই দেখতে একই রকম মনে হলেও, ব্যবহার ও সুবিধার দিক থেকে কিছু গুরুত্বপূর্ণ পার্থক্য রয়েছে।
 
-Interface:
-কোনো object বা class-এর structure তৈরি করার জন্য বেশি ব্যবহার হয়।
-সহজে extend করা যায়।
-একই নামে একাধিক interface লিখলে TypeScript সেগুলোকে merge করে নেয়।
-বড় প্রজেক্টে structure maintain করা সহজ হয়।
+#### Interface:
+
+- কোনো object বা class-এর structure তৈরি করার জন্য বেশি ব্যবহার হয়।
+- সহজে extend করা যায়।
+- একই নামে একাধিক interface লিখলে TypeScript সেগুলোকে merge করে নেয়।
+- বড় প্রজেক্টে structure maintain করা সহজ হয়।
+
+```typescript
 interface User {
-name: string;
-age: number;
+  name: string;
+  age: number;
 }
 
 // Interface extension
 interface User {
-email?: string;
+  email?: string;
 }
 
 const person: User = {
-name: "Alex",
-age: 25,
-email: "alex@example.com",
+  name: "Alex",
+  age: 25,
+  email: "alex@example.com",
 };
+```
+
+#### Type:
+
+- Type আরও flexible—object ছাড়াও union, intersection, primitive, tuple ইত্যাদি define করতে পারে।
+- একবার কোনো type declare করলে পুনরায় একই নামে declare করা যায় না (no merging).
+- Complex type বা বিভিন্ন type compose করতে সুবিধা হয়।
+
+```typescript
+type User = {
+  name: string;
+  age: number;
+};
+
+// Union type example
+type Status = "success" | "error" | "pending";
+
+// Intersection example
+type Employee = User & {
+  salary: number;
+};
+
+const emp: Employee = {
+  name: "Sara",
+  age: 28,
+  salary: 50000,
+};
+```
